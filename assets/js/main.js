@@ -20,3 +20,27 @@ function crearTablero() {     // Creamos la funcion que visualisara el tablero
 	}		    
 			    
 }
+
+			
+function mostrarNumero(e){      // declaramos la funcion que asignara el numero en cada elemento div
+	var myid = this.id;		   // valor del id
+	var auxstr=this.id.split("") //  el id se convierte en array	
+	divObj = document.getElementById(myid);// aqui traemos el objeto div creado en el paso anterior con el valor de myid
+
+    if(minas[parseInt(auxstr[0])][parseInt(auxstr[1])] == 0){ // generamos las condiciones si el elemneto esta vacio
+			divObj.style.backgroundColor = "white";			//el objeto se tornara blanco		
+			abrirAlrededor(parseInt(auxstr[0],10),parseInt(auxstr[1],10),minas);//y abrira los divs a su alrededor que no sean bombs
+  }
+	   
+	else{  // si no esta vacio
+        if(minas[parseInt(auxstr[0],10)][parseInt(auxstr[1],10)] != "*"){ // si el elmento dentro del div no es *
+			document.getElementById(myid).innerHTML = "<p style='margin-top:15px;'>" + minas[parseInt(auxstr[0],10)][parseInt(auxstr[1],10)] + "</p>";
+			divObj.style.backgroundColor = "white";
+   }
+		else{
+				divObj.style.backgroundImage = "url(assets/image/bomba.jpg)";						
+				abrirTablero(minas);
+						alert("Perdiste =(");
+			}
+		}						
+	}				
